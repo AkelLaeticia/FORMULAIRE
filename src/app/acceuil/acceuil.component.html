@@ -1,0 +1,66 @@
+<div class ="card">
+    <div class = "card-header text-white bg-info" > 
+S'enregistrer
+</div>
+   <form   class ="form-inscription"  
+   (ngSubmit) = "onSubmit(inscriptionForm)" #inscriptionForm='ngForm'
+   > 
+ <div class="form-group"   [formGroup] = "myform" >
+                <div class = "col-md-6 mb-3">
+                    <label class = "col-form-label"> Nom</label>
+                    <input type="text" class="form-control" formControlName= 'nom' placeholder="Nom"  [(ngModel)]="user.lastname" name="lastanme" 
+                     required  
+                     [ngClass]="{'is-valid': myform.get('nom')?.touched && !myform.get('nom')?.valid}" >
+            
+
+                </div>
+                
+
+            </div>
+            
+            <div class ="form-group"  [formGroup] = "myform">
+                <div class = "col-md-6 mb-3">
+                <label class ="col-form-label"></label> Prenom
+                <input type="text" class="form-control" formControlName= 'prenom' [(ngModel)]="user.firstname" name="firstname" 
+                [ngClass]="{'is-valid': myform.get('prennom')?.touched && !myform.get('prenom')?.valid}"/>
+                </div>
+            </div>
+            <div class ="form-group" [formGroup] = "myform">
+                <div class = "col-md-6 mb-3">
+                <label class ="col-form-label"></label> Email
+                <input type="email" class="form-control" formControlName= 'email' [(ngModel)]="user.email" name="email" 
+                [ngClass]="{'is-valid': (myform.get('email')?.touched ||!myform.get('email')?.dirty) && ! myform.get('email')?.valid }"/>
+            </div>
+            </div> 
+            <div class="invalid-feedback">
+            <span *ngIf = "myform.get('email')?.errors?.rangeError">  Entrer votre E-Mail</span> 
+        </div>
+        
+    
+                <div class="form-group" >
+                    <div class = "col-md-6 mb-3">
+                        <label class = "col-form-label"></label> Mot de passe
+                        <input type="password" class="form-control" formControlName= ' Motdepasse'  [(ngModel)]="user.password" name="password"
+                         required 
+                         [ngClass]="{'is-valid': myform.get('Motdepasse')?.touched && !myform.get('Motdepass')?.valid}"/>
+                        <small class = "text-danger">veuillez entrez un mot de passe </small>
+                    </div>
+                </div>
+        <div class= "text-right">
+                <button  class="btn btn-info"  type="submit" [disabled] = "!myform.valid"style="border: 30px;"> valider  </button>
+                </div>
+
+
+        </form>
+    </div>
+    <hr>
+    <p>Dirty:{{myform.dirty}}
+    </p>
+    <p> Pristine: {{myform.pristine}}</p>
+    <p> valid : {{ myform.valid}}</p>
+     <p>Invalid : {{ myform.invalid}}</p>
+    <p>
+        value : 
+    </p>
+    <pre>{{myform.value| json}}</pre>
+    
